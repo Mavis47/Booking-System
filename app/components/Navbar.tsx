@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useSearch } from "../contexts/SearchContexts";
 
 export default function Navbar() {
@@ -8,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between px-10 py-4 shadow-md bg-white">
       <div className="flex items-center space-x-2">
-        <h1 className="text-xl font-semibold text-gray-800">HD Highway Delite</h1>
+        <Image src="/images/logo.png" alt="logo image" width={100} height={100}/>
       </div>
 
       <div className="flex space-x-2">
