@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Experience {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  price       Float
+  image       String
+  slots       Slot[]
+  bookings    Booking[]
+}
+
+model Slot {
+  id            Int         @id @default(autoincrement())
+  date          DateTime
+  time          String
+  totalSeats    Int          @default(10)    // total capacity of the slot
+  bookedSeats   Int          @default(0) 
+  experienceId  Int
+  experience    Experience  @relation(fields: [experienceId], references: [id])
+  bookings      Booking[]
+}
+
+model Booking {
+  id           Int         @id @default(autoincrement())
+  userName     String
+  email        String
+  date         DateTime
+  time         String
+  experienceId Int
+  experience   Experience  @relation(fields: [experienceId], references: [id])
+  createdAt    DateTime    @default(now())
+
+  Slot Slot[]
+}
